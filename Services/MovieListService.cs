@@ -15,11 +15,11 @@ public class MovieListService
     }
 
     #region Create
-    public Movie AddMovie(Movie param)
+    public async Task<Movie> AddMovieAsync(Movie param)
     {
         try
         {
-            return _context.AddMovie(param);
+            return await _context.AddMovieAsync(param);
         }
         catch (Exception ex)
         {
@@ -30,14 +30,14 @@ public class MovieListService
     #endregion
 
     #region Get
-    public Movie GetMovie(int id)
+    public async Task<Movie> GetMovieAsync(int id)
     {
-        return _context.GetMovie(id);
+        return await _context.GetMovieAsync(id);
     }
 
-    public List<Movie> GetMovies()
+    public async Task<List<Movie>> GetMoviesAsync()
     {
-        return _context.GetMovies();
+        return await _context.GetMoviesAsync();
     }
     #endregion
 }

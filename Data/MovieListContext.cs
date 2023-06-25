@@ -20,7 +20,7 @@ public class MovieListContext
     }
 
     #region Get
-    public Movie GetMovie(int id)
+    public async Task<Movie> GetMovieAsync(int id)
     {
         Movie movie = new Movie();
 
@@ -42,7 +42,7 @@ public class MovieListContext
         return movie;
     }
 
-    public Movie GetMovieByTmdbId(int tmdbId)
+    public async Task<Movie> GetMovieByTmdbIdAsync(int tmdbId)
     {
         Movie movie = new Movie();
 
@@ -64,7 +64,7 @@ public class MovieListContext
         return movie;
     }
 
-    public List<Movie> GetMovies()
+    public async Task<List<Movie>> GetMoviesAsync()
     {
         List<Movie> movies = new List<Movie>();
 
@@ -88,11 +88,11 @@ public class MovieListContext
     #endregion
 
     #region Add
-    public Movie AddMovie(Movie movie)
+    public async Task<Movie> AddMovieAsync(Movie movie)
     {
         using var command = _connection.CreateCommand();
         command.CommandText = $"INSERT INTO movies (title, tmdb_id, year) VALUES('{movie.Title}', {movie.TmdbId}, {movie.Year});";
-        return GetMovieByTmdbId(movie.TmdbId);
+        return await GetMovieByTmdbIdAsync(movie.TmdbId);
     }
     #endregion
 }

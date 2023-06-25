@@ -14,7 +14,6 @@ builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 
 // Add Service classes 
-builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddSingleton<MovieListService>();
 builder.Services.AddSingleton<MovieListContext>();
 

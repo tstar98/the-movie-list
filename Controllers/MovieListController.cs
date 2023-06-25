@@ -18,9 +18,9 @@ public class MovieListController : ControllerBase
 
     #region Create
     [HttpPost("v1/movies")]
-    public ActionResult<Movie> AddMovie([FromBody]Movie param)
+    public async Task<ActionResult<Movie>> AddMovie([FromBody]Movie param)
     {
-        Movie movie = _service.AddMovie(param);
+        Movie movie = await _service.AddMovieAsync(param);
         if (movie == null)
             return StatusCode(503);
         return Ok(movie);
@@ -29,11 +29,11 @@ public class MovieListController : ControllerBase
 
     #region Get
     [HttpGet("v1/movies")]
-    public ActionResult GetMovie([FromQuery(Name = "id")] int? id)
+    public async Task<ActionResult> GetMovie([FromQuery(Name = "id")] int? id)
     {
         if (id != null)
-            return Ok(_service.GetMovie((int)id));
-        return Ok(_service.GetMovies());
+            return Ok(await _service.GetMovieAsync((int)id));
+        return Ok(await _service.GetMoviesAsync());
     }
     #endregion
 
